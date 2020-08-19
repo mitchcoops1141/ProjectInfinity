@@ -16,8 +16,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //if the player presses space bar
-        if (Input.GetButtonDown("Jump") && rb.velocity.y == 0)
+        //if the player presses space bar or touches the screen
+        if ((Input.GetButtonDown("Jump") || Input.touchCount > 0) && rb.velocity.y == 0)
         {
             //swap direction
             direction = -direction;
