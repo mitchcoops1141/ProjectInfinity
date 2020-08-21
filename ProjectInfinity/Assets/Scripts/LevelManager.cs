@@ -5,38 +5,31 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public float speed;
-    public GameObject[] levelSegments;
-
-    bool shouldSpawnSegment = true;
+    [Header("START BOTTOM LEVELS")]
+    public GameObject[] Blevels;
+    [Header("START TOP LEVELS")]
+    public GameObject[] Tlevels;
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerExit(Collider other)
     {
-        
+        //if the next level should start at the top then spawn a level through the function with a random level from the TOP array
+        if (other.CompareTag("NextStartTop")) spawnLevel(Tlevels[Random.Range(0, Tlevels.Length)]);
 
-        if (shouldSpawnSegment)
+        //if the next level should start at the top then spawn a level through the function with a random level from the BOTTOM array
+        if (other.CompareTag("NextStartBottom")) spawnLevel(Blevels[Random.Range(0, Blevels.Length)]);
+
+        void spawnLevel(GameObject nextSegment)
         {
-            StartCoroutine("SpawnSegment");
+            //variable for spawn position
+            Vector3 nextSegmentSpawn = new Vector3(nextSegment.GetComponent<BoxCollider>().size.x - 0.25f, 0, 0);
+
+            //create the level
+            Instantiate(nextSegment, nextSegmentSpawn, nextSegment.transform.rotation);
         }
-    }
-
-    IEnumerator SpawnSegment()
-    {
-        shouldSpawnSegment = false;
-
-        int nextSegmentValue = Random.Range(0, levelSegments.Length);
-        GameObject nextSegment = levelSegments[nextSegmentValue];
-
-        Instantiate(nextSegment, new Vector3(25, transform.position.y, transform.position.z), transform.rotation);
-
-        yield return new WaitForSeconds(4.98f);
-
-        shouldSpawnSegment = true;
     }
 }
