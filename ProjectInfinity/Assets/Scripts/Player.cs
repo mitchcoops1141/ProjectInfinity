@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     public float speed;
     public int direction = 1;
 
-    bool shouldMoveRight = false;
     bool onContactWithWall = false;
 
     Rigidbody rb;
@@ -21,12 +20,6 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (shouldMoveRight && rb.velocity.y == 0)
-        {
-            Debug.Log("YES");
-            rb.velocity = transform.right * speed;
-        }
-
         //move the player up or down depending on direction
         rb.velocity = transform.up * speed * direction;
     }
@@ -38,9 +31,10 @@ public class Player : MonoBehaviour
         {
             //swap direction
             direction = -direction;
+           
         }
 
-        //if pplayer is not at x of 0 and is on a wall or roof and is not on contact with a wall
+        //if player is not at x of 0 and is on a wall or roof and is not on contact with a wall
         if (transform.position.x < 0 && rb.velocity.y == 0 && !onContactWithWall)
         {
             //move player back to center
@@ -49,7 +43,13 @@ public class Player : MonoBehaviour
 
     }
 
-    void onTriggerEnter(Collider other)
+    void Death()
+    {
+        //Player death code
+
+    }
+
+    void OnTriggerEnter(Collider other)
     {
         //if player enters collision with wall
         if (other.CompareTag("Wall"))
@@ -57,9 +57,17 @@ public class Player : MonoBehaviour
             //set bool to true
             onContactWithWall = true;
         }
+
+        if (other.CompareTag("Obstacle"))
+        {
+            Death();
+        }
+
+       
+
     }
 
-    void onTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
         //if player exits collision with wall
         if (other.CompareTag("Wall"))
