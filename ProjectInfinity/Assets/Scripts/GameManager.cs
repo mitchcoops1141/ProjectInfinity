@@ -35,6 +35,6 @@ public class GameManager : MonoBehaviour
         //calc mins
         //calc secs
         float mins = Mathf.FloorToInt(timer % 60);
-        gameSpeed = mins + 1;
+        //gameSpeed = mins + 1;
     }
 }

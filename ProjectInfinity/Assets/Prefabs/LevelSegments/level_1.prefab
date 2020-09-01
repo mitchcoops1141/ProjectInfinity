@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4439220154521131634}
   m_Layer: 0
   m_Name: nxtLevelSpawner
-  m_TagString: NextStartBottom
+  m_TagString: NextLevelSpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

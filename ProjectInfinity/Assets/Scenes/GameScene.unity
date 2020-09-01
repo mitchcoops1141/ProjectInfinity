@@ -196,13 +196,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afc11c9a799149143ae3cab5fdce1167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Blevels:
-  - {fileID: 1575886779433494914, guid: 8a180def4c098d84db831895424d145f, type: 3}
+  testMode: 0
+  testLevel: {fileID: 8647952322874145969, guid: 70038df5ab54ae645b40bf0645fe0d66,
+    type: 3}
+  levels:
+  - {fileID: 8647952322874145969, guid: 443d95cee34a4f34eaaf7e4bf155e2b4, type: 3}
   - {fileID: 8647952322874145969, guid: b50dcb33408fc384b9093364da4427c3, type: 3}
-  Tlevels:
   - {fileID: 1575886779433494914, guid: c83e95170393d7f4787b2a769124a84e, type: 3}
+  - {fileID: 1575886779433494914, guid: 8a180def4c098d84db831895424d145f, type: 3}
   - {fileID: 1575886779433494914, guid: cdb4aca908e610149ae36b9797f07049, type: 3}
-  - {fileID: 8647952322874145969, guid: b50dcb33408fc384b9093364da4427c3, type: 3}
+  - {fileID: 1575886779433494914, guid: 1fc97de4354f0eb42907f836224a515c, type: 3}
 --- !u!4 &418348004
 Transform:
   m_ObjectHideFlags: 0
@@ -215,7 +218,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &418348005
 BoxCollider:
@@ -228,7 +231,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Size: {x: 0.25, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &418348006
 Rigidbody:
@@ -481,7 +484,7 @@ PrefabInstance:
     - target: {fileID: 5521455210499092083, guid: 443d95cee34a4f34eaaf7e4bf155e2b4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5521455210499092083, guid: 443d95cee34a4f34eaaf7e4bf155e2b4,
         type: 3}

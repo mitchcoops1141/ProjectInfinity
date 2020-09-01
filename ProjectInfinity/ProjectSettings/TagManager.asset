@@ -5,10 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Level
-  - NextStartTop
-  - NextStartBottom
   - Wall
   - Obstacle
+  - NextLevelSpawner
   layers:
   - Default
   - TransparentFX

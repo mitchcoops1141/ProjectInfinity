@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     public float speed;
     public int direction = 1;
 
+    public GameObject playerDeath;
+    public MeshRenderer mr;
+
     bool onContactWithWall = false;
 
     Rigidbody rb;
@@ -21,7 +24,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         //move the player up or down depending on direction
-        rb.velocity = transform.up * speed * direction;
+        rb.velocity = transform.up * speed * direction * GameManager.instance.gameSpeed;
     }
 
     void Update()
@@ -38,13 +41,27 @@ public class Player : MonoBehaviour
         if (transform.position.x < 0 && rb.velocity.y == 0 && !onContactWithWall)
         {
             //move player back to center
-            transform.position += transform.right * speed / 2 * Time.deltaTime;
+            transform.position += transform.right * speed / 2 * GameManager.instance.gameSpeed * Time.deltaTime;
         }
 
     }
 
     void Death()
     {
+        Debug.Log("Player died");
+
+        //if death cube doesnt exist
+        if (GameObject.Find("PlayerDeath(Clone)") == null)
+        {
+            //create death cube
+            Instantiate(playerDeath, transform.position, transform.rotation);
+        }       
+
+        //hide mesh for player
+        mr.enabled = false;
+
+        
+
         //Player death code
 
     }

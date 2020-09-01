@@ -77,6 +77,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   direction: 1
+  playerDeath: {fileID: 150756678247318158, guid: 7ff2a53723c48164bbc63f6a6bffa2ef,
+    type: 3}
+  mr: {fileID: 3950460485671590948}
 --- !u!1 &3950460485671590950
 GameObject:
   m_ObjectHideFlags: 0
