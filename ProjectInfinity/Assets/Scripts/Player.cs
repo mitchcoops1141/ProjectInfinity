@@ -32,8 +32,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //if the player presses space bar or touches the screen
-        if ((Input.GetButtonDown("Jump") || Input.touchCount > 0) && rb.velocity.y == 0)
+        //if the player presses space bar or touches the screen and the player is not moving up or down, and the game is not paused
+        if ((Input.GetButtonDown("Jump") || Input.touchCount > 0) && rb.velocity.y == 0 && Time.timeScale == 1f)
         {
             //swap direction
             direction = -direction;
