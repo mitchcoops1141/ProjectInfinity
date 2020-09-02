@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 150756678247318147}
   - component: {fileID: 150756678247318156}
-  - component: {fileID: 4097236629900528559}
   m_Layer: 0
   m_Name: PlayerDeath
   m_TagString: Player
@@ -112,19 +111,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &4097236629900528559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 150756678247318158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66235936a76505b47b797a6722382e8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 2
 --- !u!1 &150756678305338662
 GameObject:
   m_ObjectHideFlags: 0
@@ -4428,7 +4414,6 @@ GameObject:
   - component: {fileID: 4700680153790549892}
   - component: {fileID: 4700680153790549893}
   - component: {fileID: 4700680153790549894}
-  - component: {fileID: 695101600865181293}
   m_Layer: 0
   m_Name: Cube (63)
   m_TagString: Untagged
@@ -4526,19 +4511,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &695101600865181293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4700680153790549891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66235936a76505b47b797a6722382e8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 0
 --- !u!1 &4700680153942102697
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Player : MonoBehaviour
 
     public GameObject playerDeath;
     public MeshRenderer mr;
+    public Animation deathFlash;
+    //public GameObject test;
 
     bool onContactWithWall = false;
 
@@ -46,24 +49,22 @@ public class Player : MonoBehaviour
 
     }
 
-    void Death()
+    IEnumerator Death()
     {
-        Debug.Log("Player died");
+        deathFlash.Play();
 
         //if death cube doesnt exist
         if (GameObject.Find("PlayerDeath(Clone)") == null)
         {
             //create death cube
             Instantiate(playerDeath, transform.position, transform.rotation);
-        }       
+        }
 
-        //hide mesh for player
         mr.enabled = false;
 
-        
+        yield return new WaitForSeconds(1);
 
-        //Player death code
-
+        Destroy(gameObject);
     }
 
     void OnTriggerEnter(Collider other)
@@ -77,7 +78,7 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("Obstacle"))
         {
-            Death();
+            StartCoroutine("Death");
         }
 
        
