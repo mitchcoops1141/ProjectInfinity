@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     public GameObject playerDeath;
     public MeshRenderer mr;
     public Animation deathFlash;
-    //public GameObject test;
 
     bool onContactWithWall = false;
 
@@ -51,8 +50,6 @@ public class Player : MonoBehaviour
 
     IEnumerator Death()
     {
-        deathFlash.Play();
-
         //if death cube doesnt exist
         if (GameObject.Find("PlayerDeath(Clone)") == null)
         {
@@ -60,10 +57,16 @@ public class Player : MonoBehaviour
             Instantiate(playerDeath, transform.position, transform.rotation);
         }
 
+        //play the death falsh animation
+        deathFlash.Play();
+
+        //disbaled mesh
         mr.enabled = false;
 
-        yield return new WaitForSeconds(1);
+        //wait 2 seconds
+        yield return new WaitForSeconds(2);
 
+        //destroy player
         Destroy(gameObject);
     }
 

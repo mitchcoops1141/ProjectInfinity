@@ -3,27 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("GAME UI")]
     public GameObject gameUI;
-    public GameObject menuUI;
-    public GameObject deathUI;
-    public GameObject pauseUI;
-
     public GameObject scoreObj;
+
+    [Header("MENU UI")]
+    public GameObject menuUI;
+    public GameObject highScoreTextObj;
+
+    [Header("DEATH UI")]
+    public GameObject deathUI;
+    public GameObject deathScorePromptTextObj;
+    public GameObject deathScoreTextObj;
+
+    [Header("PAUSE UI")]
+    public GameObject pauseUI;
     public GameObject pauseScoreObj;
+
 
     float score = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        //set highscore text to the highscore player pref
+        highScoreTextObj.GetComponent<TextMeshProUGUI>().SetText("HIGHSCORE: " + PlayerPrefs.GetFloat("Highscore", 0));
+
         //on start. menu is active. game and death and pause are not
         deathUI.SetActive(false);
         gameUI.SetActive(false);
         menuUI.SetActive(true);
         pauseUI.SetActive(false);
+
+        //set score to 0
+        score = 0;
     }
 
     // Update is called once per frame
@@ -40,7 +57,7 @@ public class UIManager : MonoBehaviour
             //if cant find the player
             if (GameObject.Find("Player") == null)
             {
-
+                deathUI.SetActive(true);
             }
             //if can find the player
             else
@@ -106,13 +123,42 @@ public class UIManager : MonoBehaviour
 
         //if death menu is active
         if (deathUI.activeSelf)
-        {
+        {            
             //game and menu not active
             gameUI.SetActive(false);
             menuUI.SetActive(false);
 
+            //if score is bigger then current high score
+            if (score > PlayerPrefs.GetFloat("Highscore"))
+            {
+                //set text to for new highscore
+                deathScorePromptTextObj.GetComponent<TextMeshProUGUI>().SetText("NEW HIGHSCORE:");
+            }
+            //if score is less then high score
+            else
+            {
+                //set text to for new highscore
+                deathScorePromptTextObj.GetComponent<TextMeshProUGUI>().SetText("SCORE:");
+            }
+
+            //show the score
+            deathScoreTextObj.GetComponent<TextMeshProUGUI>().SetText(score.ToString());
+
             //gamespeed = 0
             Time.timeScale = 0.0f;
         }
+    }
+
+    public void Back()
+    {
+        //if the current score is bigger then the highscore
+        if (score > PlayerPrefs.GetFloat("Highscore"))
+        {
+            //update the highscore
+            PlayerPrefs.SetFloat("Highscore", score);
+        }
+
+        //reset the scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
