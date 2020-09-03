@@ -6,16 +6,25 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    [Header("GENERAL VARIABLES")]
     public float speed;
     public int direction = 1;
 
+    [Header("CONNECTIONS")]
     public GameObject playerDeath;
     public MeshRenderer mr;
     public Animation deathFlash;
 
-    bool onContactWithWall = false;
+    [Header("CAMERA SHAKE")]
+    public Transform cam;
+    public float shakeAmount;
+    public float shakeTime;
 
+    //private varibles
+    bool onContactWithWall = false;
+    bool isShaking = false;
     Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +69,9 @@ public class Player : MonoBehaviour
         //play the death falsh animation
         deathFlash.Play();
 
+        //run the camera shake function
+        StartCoroutine("CameraShake");
+
         //disbaled mesh
         mr.enabled = false;
 
@@ -68,6 +80,34 @@ public class Player : MonoBehaviour
 
         //destroy player
         Destroy(gameObject);
+
+    }
+
+    IEnumerator CameraShake()
+    {
+        isShaking = true;
+
+        //initialize counter
+        float t = shakeTime;
+
+        //get camera initial position
+        Vector3 ogPos = cam.position;
+
+        while (t > 0)
+        {
+            //countdown with time
+            t -= Time.deltaTime;
+
+            //this will shake the camera based on its original position
+            cam.position = ogPos + Random.insideUnitSphere * shakeAmount;
+
+            yield return null;
+        }
+
+        //reset camera
+        cam.position = ogPos;
+
+        isShaking = false;
     }
 
     void OnTriggerEnter(Collider other)

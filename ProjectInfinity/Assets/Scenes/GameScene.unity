@@ -3272,6 +3272,21 @@ PrefabInstance:
       propertyPath: deathFlash
       value: 
       objectReference: {fileID: 1868100032}
+    - target: {fileID: 3950460485278059394, guid: 28532dda2d0e04b44b7a08be1bebe554,
+        type: 3}
+      propertyPath: shakeTime
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3950460485278059394, guid: 28532dda2d0e04b44b7a08be1bebe554,
+        type: 3}
+      propertyPath: shakeAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3950460485278059394, guid: 28532dda2d0e04b44b7a08be1bebe554,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 963194228}
     - target: {fileID: 3950460485278059395, guid: 28532dda2d0e04b44b7a08be1bebe554,
         type: 3}
       propertyPath: m_LocalPosition.x
