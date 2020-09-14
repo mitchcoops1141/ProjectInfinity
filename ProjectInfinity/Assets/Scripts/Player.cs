@@ -22,12 +22,16 @@ public class Player : MonoBehaviour
 
     //private varibles
     bool onContactWithWall = false;
+
     bool isShaking = false;
+    bool isDead = false;
     Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
+        isDead = false;
+
         rb = GetComponent<Rigidbody>();
     }
 
@@ -45,7 +49,6 @@ public class Player : MonoBehaviour
         {
             //swap direction
             direction = -direction;
-           
         }
 
         //if player is not at x of 0 and is on a wall or roof and is not on contact with a wall
@@ -54,11 +57,12 @@ public class Player : MonoBehaviour
             //move player back to center
             transform.position += transform.right * speed / 2 * GameManager.instance.gameSpeed * Time.deltaTime;
         }
-
     }
 
     IEnumerator Death()
     {
+        isDead = true;
+
         //if death cube doesnt exist
         if (GameObject.Find("PlayerDeath(Clone)") == null)
         {
@@ -66,8 +70,10 @@ public class Player : MonoBehaviour
             Instantiate(playerDeath, transform.position, transform.rotation);
         }
 
-        //play the death falsh animation
-        deathFlash.Play();
+        //if not already shaking
+        if (!isShaking)
+            //play the death falsh animation
+            deathFlash.Play();
 
         //run the camera shake function
         StartCoroutine("CameraShake");
@@ -121,11 +127,11 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("Obstacle"))
         {
-            StartCoroutine("Death");
+            //if not already dead
+            if (!isDead)
+                //run death code
+                StartCoroutine("Death");
         }
-
-       
-
     }
 
     void OnTriggerExit(Collider other)

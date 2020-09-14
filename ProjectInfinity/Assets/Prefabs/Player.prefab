@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3950460485278059406}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.59, y: 3.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3950460485671590949}
@@ -80,6 +80,10 @@ MonoBehaviour:
   playerDeath: {fileID: 150756678247318158, guid: 7ff2a53723c48164bbc63f6a6bffa2ef,
     type: 3}
   mr: {fileID: 3950460485671590948}
+  deathFlash: {fileID: 0}
+  cam: {fileID: 0}
+  shakeAmount: 0
+  shakeTime: 0
 --- !u!1 &3950460485671590950
 GameObject:
   m_ObjectHideFlags: 0

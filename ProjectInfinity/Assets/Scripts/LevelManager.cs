@@ -12,33 +12,20 @@ public class LevelManager : MonoBehaviour
     [Header("LEVELS")]
     public GameObject[] levels;
 
-    // Start is called before the first frame update
-    void Start()
+    public static LevelManager instance = null;
+
+    void Awake()
     {
-        
-    }
+        //checking if there is a level manager 
+        if (instance == null)
+            //make this the level manager
+            instance = this;
+        //if we load a new level and this is not the current instance of the level manager
+        else if (instance != this)
+            //destroy the new script
+            Destroy(gameObject);
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("NextLevelSpawner"))
-        {
-            if (testMode)
-            {
-                spawnLevel(testLevel);
-            }
-            else
-            {
-                spawnLevel(levels[Random.Range(0, levels.Length)]);
-            }
-        }
-
-        void spawnLevel(GameObject nextSegment)
-        {
-            //variable for spawn position
-            Vector3 nextSegmentSpawn = new Vector3(nextSegment.GetComponent<BoxCollider>().size.x - 1f, 0, 0);
-
-            //create the level
-            Instantiate(nextSegment, nextSegmentSpawn, nextSegment.transform.rotation);
-        }
+        //dont destroy this gameobject the script is attatched to
+        DontDestroyOnLoad(gameObject);
     }
 }

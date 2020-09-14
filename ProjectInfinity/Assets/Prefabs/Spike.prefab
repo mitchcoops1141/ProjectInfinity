@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6034879751155836452}
   - component: {fileID: 1876829921618586420}
   - component: {fileID: 4513346508722469374}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spike
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1987775249324423710}
   m_LocalRotation: {x: -0, y: -0, z: 0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0, y: -3.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0.9}
+  m_LocalScale: {x: 1, y: 1, z: 0.8}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0

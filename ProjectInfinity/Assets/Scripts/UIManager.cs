@@ -96,6 +96,8 @@ public class UIManager : MonoBehaviour
                 //reset time and game
                 Time.timeScale = 1.0f;
 
+                pauseUI.SetActive(false);
+
                 //set game ui to active
                 gameUI.SetActive(true);
             }
@@ -158,7 +160,19 @@ public class UIManager : MonoBehaviour
             PlayerPrefs.SetFloat("Highscore", score);
         }
 
+        //reset the score
+        GameManager.instance.gameSpeed = 1;
+
         //reset the scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void Pause()
+    {
+
+        gameUI.SetActive(false);
+        //set pause screen actvie
+        pauseUI.SetActive(true);
+        
     }
 }

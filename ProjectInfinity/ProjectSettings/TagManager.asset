@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Obstacle
   - NextLevelSpawner
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -17,10 +18,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Strip
+  - Player
+  - Spike
+  - PlayerOutline
   - 
   - 
   - 
