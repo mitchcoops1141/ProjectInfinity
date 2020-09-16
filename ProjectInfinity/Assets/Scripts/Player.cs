@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     public float shakeTime;
 
     //private varibles
-    bool onContactWithWall = false;
+    bool onContactWithFloor = false;
 
     bool isShaking = false;
     bool isDead = false;
@@ -38,24 +38,33 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        Vector3 movement = Vector3.zero;
+
         //move the player up or down depending on direction
-        rb.velocity = transform.up * speed * direction * GameManager.instance.gameSpeed;
+        if (!onContactWithFloor)
+            movement.y = transform.up.y * speed * direction * GameManager.instance.gameSpeed;
+
+        //if player is not at x of 0 and is on a wall or roof and is not on contact with a wall
+        if (transform.position.x < 0)
+        {
+            //Debug.Log("Moving right");
+            //move player back to center
+            movement.x = transform.right.x * speed / 2 * GameManager.instance.gameSpeed;
+        }
+
+        //Debug.Log(movement);
+        rb.velocity = movement;
     }
 
     void Update()
     {
+        //Debug.Log(onContactWithFloor);
         //if the player presses space bar or touches the screen and the player is not moving up or down, and the game is not paused
-        if ((Input.GetButtonDown("Jump") || Input.touchCount > 0) && rb.velocity.y == 0 && Time.timeScale == 1f)
+        if ((Input.GetButtonDown("Jump") || Input.touchCount > 0) && onContactWithFloor && Time.timeScale == 1f)
         {
             //swap direction
             direction = -direction;
-        }
-
-        //if player is not at x of 0 and is on a wall or roof and is not on contact with a wall
-        if (transform.position.x < 0 && rb.velocity.y == 0 && !onContactWithWall)
-        {
-            //move player back to center
-            transform.position += transform.right * speed / 2 * GameManager.instance.gameSpeed * Time.deltaTime;
+            onContactWithFloor = false;
         }
     }
 
@@ -118,12 +127,7 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        //if player enters collision with wall
-        if (other.CompareTag("Wall"))
-        {
-            //set bool to true
-            onContactWithWall = true;
-        }
+
 
         if (other.CompareTag("Obstacle"))
         {
@@ -134,14 +138,17 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
+    void OnCollisionEnter(Collision other)
     {
-        //if player exits collision with wall
-        if (other.CompareTag("Wall"))
+        Debug.Log("COLLIDED");
+        //if player enters collision with wall
+        if (other.gameObject.CompareTag("Floor"))
         {
-            //set bool to false
-            onContactWithWall = false;
+            //set bool to true
+            onContactWithFloor = true;
         }
     }
+
+
 
 }

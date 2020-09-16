@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public GameObject levelBase;
+
     [Header("TESTING")]
     public bool testMode;
     public GameObject testLevel;
 
     [Header("LEVELS")]
     public GameObject[] levels;
+    
 
     public static LevelManager instance = null;
 
