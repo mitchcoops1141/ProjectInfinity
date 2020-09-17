@@ -20,51 +20,57 @@ public class Player : MonoBehaviour
     public float shakeAmount;
     public float shakeTime;
 
+    [Header("RAY")]
+    public LayerMask floor;
+    public LayerMask level;
+    public float rayDistance;
+
     //private varibles
     bool onContactWithFloor = false;
 
     bool isShaking = false;
     bool isDead = false;
+
     Rigidbody rb;
+    Vector3 movement = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
     {
+        //starting variable
         isDead = false;
 
+        //get rigidbody
         rb = GetComponent<Rigidbody>();
     }
 
 
     void FixedUpdate()
     {
-        Vector3 movement = Vector3.zero;
+        //call function
+        LandedRay();
 
-        //move the player up or down depending on direction
-        if (!onContactWithFloor)
-            movement.y = transform.up.y * speed * direction * GameManager.instance.gameSpeed;
-
-        //if player is not at x of 0 and is on a wall or roof and is not on contact with a wall
-        if (transform.position.x < 0)
-        {
-            //Debug.Log("Moving right");
-            //move player back to center
-            movement.x = transform.right.x * speed / 2 * GameManager.instance.gameSpeed;
-        }
-
-        //Debug.Log(movement);
+        //set velocity to movement vector
         rb.velocity = movement;
     }
 
     void Update()
     {
-        //Debug.Log(onContactWithFloor);
-        //if the player presses space bar or touches the screen and the player is not moving up or down, and the game is not paused
+
+        //if the player presses space bar or touches the screen and the player is on the floor or the roof, and the game is not paused
         if ((Input.GetButtonDown("Jump") || Input.touchCount > 0) && onContactWithFloor && Time.timeScale == 1f)
         {
             //swap direction
             direction = -direction;
-            onContactWithFloor = false;
+        }
+
+        //lock x position in place
+        if (transform.position.x > 0)
+        {
+            //restict veloctiy
+            movement.x = 0;
+            //restrict position
+            transform.position = new Vector3(0, transform.position.y, 0);
         }
     }
 
@@ -125,10 +131,53 @@ public class Player : MonoBehaviour
         isShaking = false;
     }
 
+    void LandedRay()
+    {
+        //variable for the speed
+        float s = speed * GameManager.instance.gameSpeed;
+
+        //create a ray
+        Ray ray = new Ray(transform.position, transform.up * direction);
+
+        //store the hit of the Ray
+        RaycastHit hit;
+
+        //if it hits soemthing that is a floor or a level
+        if (Physics.Raycast(ray, out hit, rayDistance, floor) || Physics.Raycast(ray, out hit, rayDistance, level))
+        {
+            //draw green line if hitting something
+            Debug.DrawRay(transform.position, transform.up * rayDistance * direction, Color.green);
+
+            //if the ray hits a floor
+            if (hit.transform.CompareTag("Floor"))
+            {
+                //set bool to be true
+                onContactWithFloor = true;
+            }
+
+            //if the players position is less then the center
+            if (transform.position.x < 0)
+            {
+                //increase horizontal movement to get back to center
+                movement.x = s / 3;
+            } 
+        }
+        //if it doesnt hit something interactable
+        else
+        {
+            //draw red line if not hitting something
+            Debug.DrawRay(transform.position, transform.up * rayDistance * direction, Color.red);
+
+            //set bool to false
+            onContactWithFloor = false;
+
+            //increase movement for y velocty
+            movement.y = direction * s; 
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
-
-
         if (other.CompareTag("Obstacle"))
         {
             //if not already dead
@@ -137,18 +186,4 @@ public class Player : MonoBehaviour
                 StartCoroutine("Death");
         }
     }
-
-    void OnCollisionEnter(Collision other)
-    {
-        Debug.Log("COLLIDED");
-        //if player enters collision with wall
-        if (other.gameObject.CompareTag("Floor"))
-        {
-            //set bool to true
-            onContactWithFloor = true;
-        }
-    }
-
-
-
 }

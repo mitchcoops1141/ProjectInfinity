@@ -47,6 +47,9 @@ public class GameManager : MonoBehaviour
 
         //dont destroy this gameobject the script is attatched to
         DontDestroyOnLoad(gameObject);
+
+        //reset game speed
+        gameSpeed = 1;
     }
 
     
@@ -95,6 +98,16 @@ public class GameManager : MonoBehaviour
         strip.color = wall.color;
         //set the level walls to be the same as the wall
         levelWall.color = wall.color;
+
+        //increase games speed
+        gameSpeed += gameSpeedIncreaseRate * Time.deltaTime;
+
+        //if the speed goes past max
+        if (gameSpeed > maxGameSpeed)
+        {
+            //set speed to max
+            gameSpeed = maxGameSpeed;
+        }
     }
 
     IEnumerator ColorChange()
@@ -106,16 +119,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         colorIndex = UnityEngine.Random.Range(0, backgroundColors.Length - 1);
-
-        //increase the speed
-        GameManager.instance.gameSpeed += gameSpeedIncreaseRate;
-
-        //if the speed goes past max
-        if (GameManager.instance.gameSpeed > maxGameSpeed)
-        {
-            //set speed to max
-            GameManager.instance.gameSpeed = maxGameSpeed;
-        }
 
         //set the next colors based off the index
         nextColorBackground = backgroundColors[colorIndex];

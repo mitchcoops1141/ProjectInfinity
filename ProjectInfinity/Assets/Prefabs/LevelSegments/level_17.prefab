@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4262631226045383518}
   m_Layer: 13
   m_Name: level_17
-  m_TagString: Level
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

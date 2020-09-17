@@ -19,6 +19,8 @@ public class LevelSegment : MonoBehaviour
 
         //get rigidbody
         rb = GetComponent<Rigidbody>();
+
+        canSpawn = true;
     }
 
     // Update is called once per frame

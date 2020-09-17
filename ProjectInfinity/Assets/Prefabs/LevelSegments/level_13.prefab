@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6558521421384098709}
   m_Layer: 13
   m_Name: level_13
-  m_TagString: Level
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2394336892422452964}
   m_Layer: 13
   m_Name: Floor (3)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 6046801634230487571}
   m_Layer: 13
   m_Name: Floor (2)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 5670037064098952709}
   m_Layer: 13
   m_Name: Floor (4)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 2440035082774345099}
   m_Layer: 13
   m_Name: Floor (8)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
