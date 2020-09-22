@@ -431,7 +431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelBase: {fileID: 8647952323474282010}
-  testMode: 1
+  testMode: 0
   testLevel: {fileID: 1575886779433494914, guid: 7de8976083f53514aaf16e41adbae0f0,
     type: 3}
   levels:
