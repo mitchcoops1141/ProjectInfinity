@@ -7,8 +7,6 @@ public class SpikeWall : MonoBehaviour
     GameObject player;
     public float speed;
 
-    bool retractBlade = false;
-
     void Start()
     {
         //get the player
@@ -24,7 +22,7 @@ public class SpikeWall : MonoBehaviour
         if (player != null)
         {
             //if player is not in the middle of the screen
-            if (player.transform.position.x < 0)
+            if (player.transform.position.x < -0.5f)
             {
                 //move the wall to reveal the spikes
                 transform.position = new Vector3(transform.position.x - s * Time.deltaTime, transform.position.y, transform.position.z);

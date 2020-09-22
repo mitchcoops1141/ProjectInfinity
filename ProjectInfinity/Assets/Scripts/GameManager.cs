@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        Application.targetFrameRate = 60;
+        //Application.targetFrameRate = 60;
 
         //checking if there is a game manager 
         if (instance == null)
@@ -50,6 +50,12 @@ public class GameManager : MonoBehaviour
 
         //reset game speed
         gameSpeed = 1;
+
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.Play("Song");
+        }
+        
     }
 
     
@@ -67,6 +73,8 @@ public class GameManager : MonoBehaviour
         wall.color = wallColors[colorIndex];
         //set the next wall color to be the current wall color
         nextColorWall = wallColors[colorIndex];
+
+        AudioManager.instance.Play("Song");
     }
 
     float timer = 1;
@@ -81,9 +89,9 @@ public class GameManager : MonoBehaviour
         //gameSpeed = mins + 1;
 
         //transition the background color the next background color
-        background.color = Color.Lerp(background.color, nextColorBackground, 0.005f);
+        background.color = Color.Lerp(background.color, nextColorBackground, 0.5f * Time.deltaTime);
         //transitionthe wall color to the next wall color
-        wall.color = Color.Lerp(wall.color, nextColorWall, 0.005f);
+        wall.color = Color.Lerp(wall.color, nextColorWall, 0.5f * Time.deltaTime);
 
         //if we should transition the color
         if (shouldChangeColor)

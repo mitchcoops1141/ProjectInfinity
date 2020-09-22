@@ -62,6 +62,8 @@ public class Player : MonoBehaviour
         {
             //swap direction
             direction = -direction;
+            //play the jump sound
+            AudioManager.instance.PlayOneShot("Jump");
         }
 
         //lock x position in place
@@ -77,6 +79,10 @@ public class Player : MonoBehaviour
     IEnumerator Death()
     {
         isDead = true;
+
+        //play the death sound
+        AudioManager.instance.PlayOneShot("Death");
+        AudioManager.instance.Stop("Song");
 
         //if death cube doesnt exist
         if (GameObject.Find("PlayerDeath(Clone)") == null)
@@ -159,7 +165,7 @@ public class Player : MonoBehaviour
             if (transform.position.x < 0)
             {
                 //increase horizontal movement to get back to center
-                movement.x = s / 3;
+                movement.x = s / 5;
             } 
         }
         //if it doesnt hit something interactable
